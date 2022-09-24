@@ -37,6 +37,7 @@ android {
     }
     buildFeatures {
         compose true
+        viewBinding true
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
@@ -51,6 +52,11 @@ android {
 dependencies {
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
     kapt "com.google.dagger:hilt-android-compiler:2.37"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
@@ -77,6 +83,38 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    // coil
+    implementation("io.coil-kt:coil-compose:2.1.0")
+
+    // Moshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
+
+    // Retrofit with Moshi Converter
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Room
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.3.0"
+
+
+
+    //Photo editor
+    implementation 'com.burhanrashid52:photoeditor:2.0.0'
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+
+    //Mateiral Design3
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation "androidx.compose.material3:material3:1.0.0-alpha02"
+
+    //Flow row
+    implementation "com.google.accompanist:accompanist-flowlayout:0.23.1"
+
+
 }
 
 kapt {

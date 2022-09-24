@@ -18,7 +18,6 @@ import javax.inject.Inject
 class ExploreViewModel @Inject constructor(
     private val memeUseCases: MemeUseCases
 ): ViewModel() {
-
     private val _state = mutableStateOf(ExploreState())
     val state: State<ExploreState> = _state
 
@@ -52,10 +51,10 @@ class ExploreViewModel @Inject constructor(
 
     private fun getMemes(keyword: String?){
         getMemesJob?.cancel()                 // cancel the subscription to the previous flow
-        getMemesJob = memeUseCases.getMemes() // request the new flow
+        getMemesJob = memeUseCases.exploreMemes() // request the new flow
             .onEach { memes ->
                 _state.value = state.value.copy( // flow overwrite the modified memes
-                    memes = if (keyword != null) memes.filter{ keyword in it.tags }  else memes // TODO: should have filtered in repository
+                    memes = if (keyword == null || keyword == "") memes  else  memes.filter{ keyword in it.tags }// TODO: should have filtered in repository
                 )
             }
             .launchIn(viewModelScope)
@@ -66,4 +65,16 @@ class ExploreViewModel @Inject constructor(
      Why we don't call collect() on flow? see:
      https://handstandsam.com/2021/02/19/the-best-way-to-collect-a-flow-in-kotlin-launchin/
     */
+
+    fun updatetext(newkeyword: String){
+        _state.value = state.value.copy(
+            keyword = newkeyword
+        )
+    }
+
+    fun updatebar(newsearchbaractivate: Boolean){
+        _state.value = state.value.copy(
+            searchbaractivate = newsearchbaractivate
+        )
+    }
 }
